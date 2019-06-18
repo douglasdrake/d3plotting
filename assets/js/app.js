@@ -219,16 +219,7 @@ d3.csv("assets/data/data.csv", function(err, stateData) {
   var bottomAxis = d3.axisBottom(xLinearScale);
   var leftAxis = d3.axisLeft(yLinearScale);
 
-  // append x axis
-  var xAxis = chartGroup.append("g")
-    .classed("x-axis", true)
-    .attr("transform", `translate(0, ${height})`)
-    .call(bottomAxis);
-
-  // append y axis
-  var yAxis = chartGroup.append("g")
-    .call(leftAxis);
-
+  
   // append initial circles
   var circlesGroup = chartGroup.selectAll("circle")
     .data(stateData)
@@ -252,6 +243,16 @@ d3.csv("assets/data/data.csv", function(err, stateData) {
     .attr("dx", -5)
     .attr("dy", +3);
   
+  // append x axis
+  var xAxis = chartGroup.append("g")
+    .classed("x-axis", true)
+    .attr("transform", `translate(0, ${height})`)
+    .call(bottomAxis);
+
+  // append y axis
+  var yAxis = chartGroup.append("g")
+    .call(leftAxis);
+
   var titleGroup = chartGroup.append("text")
     .attr("x", (width / 2))             
     .attr("y", 0 - (margin.top / 2))
