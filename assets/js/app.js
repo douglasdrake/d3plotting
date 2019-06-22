@@ -56,6 +56,18 @@ axisLabelMap.set("age", "Age (Median)")
     .set("obesity", "Obesity (%)");
 
 
+var titleMap = new Map();
+
+titleMap.set("ageobesity", "Obesity (%) vs Age")
+  .set("agesmokes", "Smoking (%) vs Age")
+  .set("agehealthcare", "% Lacking Healthcare vs Age")
+  .set("incomeobesity", "Obesity (%) vs Median Household Income")
+  .set("incomesmokes", "Smoking (%) vs Median Household Income")
+  .set("incomehealthcare", "% Lacking Healthcare vs Age")
+  .set("povertyobesity", "Obesity (%) vs % Under Poverty Threshold")
+  .set("povertysmokes", "Smoking (%) vs % Under Poverty Threshold")
+  .set("povertyhealthcare", "% Lacking Healthcare vs % Under Poverty Threshold")
+
 // function used for computing correlation coefficient using Jstat
 function getSpearman(stateData, chosenXaxis, chosenYaxis) {
   
@@ -259,7 +271,7 @@ d3.csv("assets/data/data.csv", function(err, stateData) {
     .attr("text-anchor", "middle")  
     .style("font-size", "16px") 
     .style("text-decoration", "underline")  
-    .text("Spearman's Rho: " + spearmanMap.get(chosenXAxis+chosenYAxis));
+    .text(titleMap.get(chosenXAxis+chosenYAxis) + "   [Spearman's Rho: " + spearmanMap.get(chosenXAxis+chosenYAxis) + "]");
   
     // Create group for  3 x- axis labels
   var xlabelsGroup = chartGroup.append("g")
@@ -350,7 +362,7 @@ d3.csv("assets/data/data.csv", function(err, stateData) {
         [circlesGroup, labelsGroup] = renderCircles(circlesGroup, labelsGroup, xLinearScale, chosenXAxis, yLinearScale, chosenYAxis);
 
         // update title:
-        titleGroup.text("Spearman's Rho: " + spearmanMap.get(chosenXAxis+chosenYAxis));
+        titleGroup.text( titleMap.get(chosenXAxis+chosenYAxis) + "   [Spearman's Rho: " + spearmanMap.get(chosenXAxis+chosenYAxis) + "]");
 
         // updates tooltips with new info
         circlesGroup = updateToolTip(chosenXAxis, chosenYAxis, circlesGroup);
@@ -419,7 +431,7 @@ d3.csv("assets/data/data.csv", function(err, stateData) {
       [circlesGroup, labelsGroup] = renderCircles(circlesGroup, labelsGroup, xLinearScale, chosenXAxis, yLinearScale, chosenYAxis);
 
       // update title:
-      titleGroup.text("Spearman's Rho: " + spearmanMap.get(chosenXAxis+chosenYAxis));
+      titleGroup.text(titleMap.get(chosenXAxis+chosenYAxis) + "   [Spearman's Rho: " + spearmanMap.get(chosenXAxis+chosenYAxis) + "]");
 
       // updates tooltips with new info
       circlesGroup = updateToolTip(chosenXAxis, chosenYAxis, circlesGroup);
